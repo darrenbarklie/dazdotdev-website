@@ -15,9 +15,9 @@ interface Category {
   slug: string;
 }
 
-export function generateCategoryData(categories: any) {
-  let categoryData: Category[] = [];
-  categories.forEach((category: string) => {
+export function generateCategoryData(categories: string[]) {
+  const categoryData: Category[] = [];
+  categories.forEach((category) => {
     categoryData.push({
       name: category,
       slug: generateSlug(category),

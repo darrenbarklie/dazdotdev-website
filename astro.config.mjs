@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import solidJs from "@astrojs/solid-js";
 
@@ -18,7 +18,9 @@ export default defineConfig({
       remarkPlugins: [remarkToc],
       rehypePlugins: [rehypeAutolinkHeadings],
     }),
-    tailwind(),
     solidJs(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
