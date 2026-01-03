@@ -20,7 +20,7 @@ export function generateCategoryData(categories: any) {
   categories.forEach((category: string) => {
     categoryData.push({
       name: category,
-      slug: `$(generateSlug(category))`,
+      slug: generateSlug(category),
     });
   });
   return categoryData;

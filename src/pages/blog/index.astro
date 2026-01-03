@@ -1,17 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 import BlogItem from "../../components/blog/BlogItem.astro";
 import Layout from "../../layouts/Layout.astro";
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("../blog/*.{md,mdx}")).sort(
+const posts = (await getCollection("blog")).sort(
   (a, b) =>
-    new Date(b.frontmatter.date).valueOf() -
-    new Date(a.frontmatter.date).valueOf()
+    new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
 ---
 
 <Layout title="Blog">
   <ul>
-    {posts.map((item) => <BlogItem url={item.url} content={item.frontmatter} />)}
+    {posts.map((post) => (
+      <BlogItem url={`/blog/${post.id}`} content={post.data} />
+    ))}
   </ul>
 </Layout>

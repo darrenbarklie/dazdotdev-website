@@ -2,7 +2,7 @@
 layout: "../../layouts/LayoutBlog.astro"
 title: "Getting Started with SurrealDB"
 description: "SurrealDB recently hit their v1.0 release and promise to combine the best of relational, graphic and document databases with realtime updates."
-date: "2022-00-13"
+date: "2022-09-13"
 categories:
   - Web Development
   - Database
@@ -24,38 +24,6 @@ Hey
 ```bash
 surreal start --log debug --user root --pass root memory
 ```
-
-
-```bash
-
-
-
-DATA="CREATE account SET
-	name = 'ACME Inc',
-	created_at = time::now();"
-curl -k -L -s --compressed POST \
-	--header "Content-Type: application/json" \
-	--header "NS: test" \
-	--header "DB: test" \
-	--user "root:root" \
-	--data "${DATA}" \
-	http://localhost:8000/sql
-
-
-
-curl -k -L -s --compressed POST \
-	--header "Content-Type: application/json" \
-	--header "NS: test" \
-	--header "DB: test" \
-	--user "root:root" \
-	--data "SELECT * FROM article;" \
-	http://localhost:8000/sql
-
-
-
-```
-
-
 
 <BlogReferences>
   <BlogReference

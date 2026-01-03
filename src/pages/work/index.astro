@@ -1,12 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import WorkItem from "../../components/work/WorkItem.astro";
 
-const work = await Astro.glob("../work/*.{md,mdx}");
+const work = await getCollection("work");
 ---
 
 <Layout title="Work History">
   <ul>
-    {work.map((item) => <WorkItem content={item.frontmatter} />)}
+    {work.map((item) => <WorkItem content={item.data} />)}
   </ul>
 </Layout>
