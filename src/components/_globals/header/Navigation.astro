@@ -3,27 +3,22 @@ import NavLink from "./NavLink.astro";
 import SocialLink from "./SocialLink.astro";
 ---
 
-<nav class="flex h-16" aria-labelledby="primary-navigation">
-  <h2 id="primary-navigation" class="hidden">Primary Navigation</h2>
-  <ul class="flex h-full">
-    {
-      [
-        ["About", "/about"],
-        ["Work", "/work"],
-        ["Blog", "/blog"],
-        ["Bookmarks", "/bookmarks"],
-      ].map(([title, url]) => (
-        <li class="flex items-center">
-          <NavLink title={title} url={url} />
-        </li>
-      ))
-    }
-    <li class="flex items-center">
-      <SocialLink
-        title="Twitter"
-        url="https://twitter.com/dazdotdev"
-        img="/svg/logo-social-twitter.svg"
-      />
-    </li>
-  </ul>
+<nav class="flex items-center gap-1" aria-labelledby="primary-navigation">
+  <h2 id="primary-navigation" class="sr-only">Primary Navigation</h2>
+  {
+    [
+      ["About", "/about"],
+      ["Work", "/work"],
+      ["Blog", "/blog"],
+      ["Bookmarks", "/bookmarks"],
+    ].map(([title, url]) => (
+      <NavLink title={title} url={url} />
+    ))
+  }
+  <span class="mx-2 opacity-50">|</span>
+  <SocialLink
+    title="Twitter"
+    url="https://twitter.com/dazdotdev"
+    img="/svg/logo-social-twitter.svg"
+  />
 </nav>

@@ -25,8 +25,17 @@ const { Content } = await render(item);
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{item.data.client}</h1>
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-cyan-400">$ cat</span>
+            <span class="text-gray-400 ml-2">./work/{item.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{item.data.client}</h1>
+          <div class="text-sm text-gray-400">
+            <span class="text-yellow-500">{item.data.date}</span>
+            <span class="mx-2">|</span>
+            <span>{item.data.location}</span>
+          </div>
         </header>
 
         <Content />

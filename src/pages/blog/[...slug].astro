@@ -32,12 +32,18 @@ const [day, month, year] = [
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{post.data.title}</h1>
-          <span class="italic">{day} {month} {year}</span>
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-cyan-400">$ cat</span>
+            <span class="text-gray-400 ml-2">./blog/{post.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{post.data.title}</h1>
+          <div class="text-gray-500 text-sm">
+            <span class="text-green-500">#</span> {day} {month} {year}
+          </div>
         </header>
 
-        <div id="excerpt" class="text-lg font-semibold mt-4 mb-4">
+        <div id="excerpt" class="text-lg opacity-80 mb-6 pl-4 border-l-2 border-cyan-400">
           {post.data.description}
         </div>
 

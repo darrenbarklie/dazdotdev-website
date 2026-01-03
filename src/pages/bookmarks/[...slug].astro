@@ -24,11 +24,21 @@ const { Content } = await render(item);
   <body>
     <Header />
 
-    <div class="container outer border">
-      <div class="max-w-2xl">
-        <PageTitle title={item.data.title} />
+    <div class="container outer">
+      <article class="prose prose-base max-w-2xl">
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-cyan-400">$ cat</span>
+            <span class="text-gray-400 ml-2">./bookmarks/{item.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{item.data.title}</h1>
+          <div class="text-sm">
+            <span class="text-yellow-500">@{item.data.source_name}</span>
+            <a href={item.data.source_url} target="_blank" rel="noopener noreferrer" class="ml-4 text-blue-400 hover:underline">[source]</a>
+          </div>
+        </header>
         <Content />
-      </div>
+      </article>
     </div>
 
     <Footer />

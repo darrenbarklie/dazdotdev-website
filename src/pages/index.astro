@@ -6,25 +6,30 @@ const title = "Home";
 
 <Layout title={title}>
   <div class="max-w-2xl">
-    <main class="prose prose-base prose-h2:text-4xl">
-      <ul>
-        <li>
-          Founder of
-          <a href="https://craftapplied.com" target="_blank">Craft Applied</a>
-          tech agency, est. 2018
-        </li>
-        <li>Full stack TypeScript developer</li>
-        <li>Currently based on Isle of Man</li>
-        <li>
-          Relapsing digital nomad:
-          <ul>
-            <li>London</li>
-            <li>New York City</li>
-            <li>Ho Chi Minh City</li>
-          </ul>
-        </li>
-        <li>Nerd for guitar, drums &amp; synth sounds</li>
-      </ul>
+    <main>
+      <div box-="square" class="p-6">
+        <div class="mb-4">
+          <span class="text-cyan-400">$ whoami</span>
+        </div>
+        <div class="space-y-2 pl-4">
+          <p>
+            <span class="text-yellow-500">→</span> Founder of
+            <a href="https://craftapplied.com" target="_blank" class="text-blue-400 hover:underline">Craft Applied</a>
+            tech agency, est. 2018
+          </p>
+          <p><span class="text-yellow-500">→</span> Full stack TypeScript developer</p>
+          <p><span class="text-yellow-500">→</span> Currently based on Isle of Man</p>
+          <p>
+            <span class="text-yellow-500">→</span> Relapsing digital nomad:
+          </p>
+          <div class="pl-6 space-y-1 text-gray-400">
+            <p><span class="text-gray-500">├─</span> London</p>
+            <p><span class="text-gray-500">├─</span> New York City</p>
+            <p><span class="text-gray-500">└─</span> Ho Chi Minh City</p>
+          </div>
+          <p><span class="text-yellow-500">→</span> Nerd for guitar, drums & synth sounds</p>
+        </div>
+      </div>
     </main>
   </div>
 </Layout>

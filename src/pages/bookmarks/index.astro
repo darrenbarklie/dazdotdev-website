@@ -7,7 +7,11 @@ const bookmarks = await getCollection("bookmarks");
 ---
 
 <Layout title="Bookmarks">
-  <ul>
+  <div class="mb-6">
+    <span class="text-cyan-400">$ ls -la ./bookmarks</span>
+    <span class="text-gray-500 ml-4"># {bookmarks.length} saved</span>
+  </div>
+  <ul class="space-y-4">
     {bookmarks.map((item) => <BookmarkItem content={item.data} />)}
   </ul>
 </Layout>

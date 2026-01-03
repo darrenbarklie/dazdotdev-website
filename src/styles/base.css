@@ -1,7 +1,20 @@
+/* WebTUI - Terminal UI Framework */
+@layer webtui-base, webtui-utils, webtui-components, base, utils, components;
+
+@import "@webtui/css/base.css" layer(webtui-base);
+@import "@webtui/css/utils/box.css" layer(webtui-utils);
+@import "@webtui/css/components/button.css" layer(webtui-components);
+@import "@webtui/css/components/typography.css" layer(webtui-components);
+@import "@webtui/css/components/badge.css" layer(webtui-components);
+@import "@webtui/css/components/separator.css" layer(webtui-components);
+@import "@webtui/css/components/input.css" layer(webtui-components);
+@import "@webtui/css/components/pre.css" layer(webtui-components);
+
+/* Tailwind - for layout utilities */
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Custom theme configuration (migrated from tailwind.config.cjs) */
+/* Custom theme configuration */
 @theme {
   /* Minor third type scale: https://type-scale.com */
   --font-size-xs: 0.694rem;
@@ -39,75 +52,82 @@
 }
 
 @layer components {
+  /* Terminal-style body */
   body {
-    @apply flex flex-col h-screen font-normal font-sans leading-relaxed bg-gray-200;
+    @apply flex flex-col min-h-screen leading-relaxed;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    background: var(--bg, #1a1b26);
+    color: var(--fg, #c0caf5);
   }
+
   body > .container.outer {
     @apply flex-grow;
   }
+
   footer#footer {
     @apply shrink-0;
   }
-  *:is(h1, h2, h3, h4, h5, h6) {
-    @apply flex items-center gap-2;
-  }
+
+  /* Heading anchor links */
   *:is(h2, h3, h4, h5, h6) > a {
     @apply -ml-6;
   }
   *:is(h2, h3, h4, h5, h6) > a .icon.icon-link {
-    @apply block w-4 h-4 bg-center bg-contain opacity-10 bg-[url('/svg/icon-link-anchor.svg')];
+    @apply block w-4 h-4 bg-center bg-contain opacity-30;
+    background-image: url('/svg/icon-link-anchor.svg');
+    filter: invert(1);
   }
   *:is(h2, h3, h4, h5, h6) > a .icon.icon-link:hover {
     @apply opacity-80;
   }
-  .prose :where(blockquote p:first-of-type):not(:where([class~="not-prose"] *))::before {
-    @apply content-none;
-  }
 
-  /* Typography customizations */
+  /* Prose/article styling for terminal */
   .prose {
     max-width: 72ch;
-    color: #212212;
+    color: var(--fg, #c0caf5);
   }
   .prose a {
-    color: #3182ce;
+    color: #7aa2f7;
   }
   .prose a:hover {
-    color: #2c5282;
+    color: #89b4fa;
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    color: #7dcfff;
   }
   .prose h1 {
-    font-size: 2.488rem;
-    margin: 0 0 1.38rem;
+    font-size: 2rem;
+    margin: 0 0 1.5rem;
   }
   .prose h2 {
-    font-size: 2.074rem;
-    margin: 3rem 0 1.38rem;
+    font-size: 1.5rem;
+    margin: 2.5rem 0 1rem;
   }
   .prose h3 {
-    font-size: 1.728rem;
-    margin: 3rem 0 1.38rem;
-  }
-  .prose h4 {
-    font-size: 1.44rem;
-    margin: 3rem 0 1.38rem;
-  }
-  .prose h5 {
-    font-size: 1.2rem;
-    margin: 3rem 0 1.38rem;
-  }
-  .prose h6 {
-    font-size: 1rem;
-    margin: 3rem 0 1.38rem;
+    font-size: 1.25rem;
+    margin: 2rem 0 0.75rem;
   }
   .prose p {
-    font-size: 1rem;
     margin-bottom: 1rem;
   }
-  .prose small {
-    font-size: 0.833rem;
+  .prose code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
   }
-  .prose code::before,
-  .prose code::after {
-    content: "";
+  .prose pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  .prose blockquote {
+    border-left: 3px solid #7aa2f7;
+    padding-left: 1rem;
+    opacity: 0.9;
   }
 }
