@@ -1,7 +1,6 @@
 import { createSignal, createResource } from "solid-js";
-import { render } from "solid-js/web";
 
-const fetchUser = async (id: any) =>
+const fetchUser = async (id: string | number) =>
   (await fetch(`https://swapi.dev/api/people/${id}/`)).json();
 
 export default function AsyncApi() {
