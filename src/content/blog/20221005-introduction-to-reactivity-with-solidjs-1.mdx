@@ -1,0 +1,296 @@
+---
+title: "Introduction to Reactivity with SolidJS (Part One)"
+description: "Capturing my understanding of Dan Jutan's YouTube introduction to SolidJS, reactivity, and why you'd want to use it."
+date: "2022-10-05"
+categories:
+  - Development
+  - Reactivity
+  - SolidJS
+---
+
+import BlogReferences from "../../components/blog/BlogReferences.astro";
+import BlogReference from "../../components/blog/BlogReference.astro";
+import Ref from "../../components/blog/Ref.astro";
+
+## Table of Contents
+
+## Introduction
+
+I've been tracking [SolidJS](https://www.solidjs.com/) for a while, as it seems to approach reactivity with better fundamentals than React, while framework author [Ryan Carniato](https://twitter.com/ryancarniato)'s enthusiasm and omnipresence for teaching and learning is infectious. To grasp the fundamentals, I've decided to transcribe _[Introduction to Reactivity with SolidJS](https://www.youtube.com/watch?v=J70HXl1KhWE&ab_channel=SolidJS)_<Ref id="1" />, an introductory video demonstration of Solid, reactivity, and why you'd want to use it, by Solid core team member [Dan Jutan](https://twitter.com/jutanium). Full credit to the Solid team.
+
+## Maintaining Relationships
+
+After creating a relationship between two values in JavaScript, changes to source values are not reflected in subsequent usage, which might seem unintuitive.
+
+It is therefore necessary to restate the relationship in order to handle the most recently assigned value:
+
+```javascript
+// Init variable
+let count = 2;
+
+// Create a relationship
+let doubleCount = count * 2;
+console.log("First: " + doubleCount);
+// => First: 4
+
+// If we change `count`, the value of the
+// relationship does not update
+count++;
+console.log("Second: " + doubleCount);
+// => Second: 4
+
+// For the relationship to hold, we have to
+// restate the relationship
+doubleCount = count * 2;
+console.log("Third: " + doubleCount);
+// => Third: 6
+```
+
+## Introducing Reactivity
+
+Solid's signals <Ref id="2" /> are the cornerstone of reactivity. They contain values that are changeable over time, with all consumers of that value automatically updating in response to the base change.
+
+```javascript
+// Solid's reactivity can instead maintain
+// that relationship over time, making it
+// into a rule that's always true
+
+// Instead of using `let` we will use `createSignal`
+// from SolidJS to create a reactive variable
+import {createSignal } from "solid-js";
+
+// Signals give us two functions: a getter & a setter
+// Pass in initial value as argument
+// Return nameable getter and setter functions
+const [count, setCount] = createSignal(2);
+
+// Call the getter to access the variable value
+let doubleCount = count() * 2;
+console.log("Forth: " + doubleCount);
+// => Forth: 4
+
+// Signals allow us to tap in to Solid's reactivity
+
+// Call getter() to access the value of variable
+// Rather than `doubleCount2` being an assignment at
+// a specific point-in-time, we write it as a
+// function of the `count` signal
+let doubleCount2 = () => count() * 2;
+console.log("Fifth: " + doubleCount2());
+// => Fifth: 4
+```
+
+
+## Creating Effects
+
+To enact changes in response to updated signal values, we can use Solid's effects. <Ref id="3" /> As signals are trackable values, observers such as effects run a side effect dependant on signal value updates.
+
+This makes reasoning about your code way easier, especially as complexity grows.
+
+```javascript
+import { createSignal, createEffect } from "solid-js";
+
+const [count, setCount] = createSignal(2);
+
+let doubleCount = () => count() * 2;
+
+// Solid can maintain this relationship over time
+// Test by updating count every second with `setInterval()`
+// Use setter() to set reactive variable to value we pass
+setInterval( () => {
+  setCount(count() + 1)
+}, 1000);
+
+// An effect is a function that depends on signals
+// With `createEffect()` we pass a function and Solid will
+// track any signals that are used inside the function scope
+// When any change is detected, the effect will rerun
+createEffect(() => {
+  console.log(doubleCount());
+});
+// => 4
+// => 6
+// => 8
+// => ...
+```
+
+## Stacking Signals
+
+When we introduce a second signal, with a different interval, it too is observed by the effect and handled accordingly. When either signal changes, the effect reruns.
+
+```javascript
+import { createSignal, createEffect } from "solid-js";
+
+// Introduce a second signal
+const [count, setCount] = createSignal(2);
+const [multiplier, setMultiplier] = createSignal(3);
+
+setInterval( () => {
+  setCount(count() + 1)
+}, 1000);
+
+// Set a different interval on new signal
+setInterval( () => {
+  setMultiplier(multiplier() + 1)
+}, 3000);
+
+// Run basic inline arithmetic statement
+createEffect(() => {
+  console.log(`${count()} * ${multiplier()} = ${count() * multiplier()}`);
+});
+// => 2 * 3 = 6
+// => 3 * 3 = 9
+// => 4 * 3 = 12
+// => 5 * 3 = 15
+// => 5 * 4 = 20
+// => 6 * 4 = 24
+// => 7 * 4 = 28
+// => 8 * 4 = 32
+// => 8 * 5 = 40
+// => ...
+```
+
+## Composable Systems
+
+This system is composable — we can pull relationships out into their own functions.
+
+```javascript
+// Make our code neater by pulling out the calculation
+const total = () => count() * multiplier();
+
+// We can pass this around, call it with an effect
+// Solid will know to look as deep as it needs to find
+// any signals and rerun the effect when they change 
+createEffect(console.log(`${count()} * ${multiplier()} = ${total()}`););
+```
+
+## Theory Behind Solid's Signals and Effects
+
+[Video summary: 3:18 — 4:31](https://youtu.be/J70HXl1KhWE?t=198)
+
+At the most basic level, `createSignal()` lets us read and write to a value.
+
+```javascript
+// pseudocode
+export function createSignal(value) {
+
+  const read = () => {
+    return value;
+  }
+
+  const write = (nextValue) => {
+    value = nextValue;
+  };
+
+  return [read, write];
+}
+```
+
+In order for reactivity to work, we need a way to track any effect that observes the signal.
+
+We'll maintain a global stack called `context`, which will let us track any effect that is currently running. A `getCurrentObserver()` function simply returns whatever is top of the stack.
+
+```javascript
+// pseudocode
+const context = [];
+
+function getCurrentObserver() {
+  return context[context.length -1];
+}
+```
+
+We ensure that this `context` is kept up to date. In `createEffect()`, we take a function and create a wrapper around it.
+
+The wrapper pushes itself onto the `context` stack, executes the function that was passed, and removes itself from the stack once it's done:
+
+```javascript 
+// pseudocode
+const context = [];
+
+function getCurrentObserver() {
+  return context[context.length -1];
+}
+
+export function createEffect(fn) {
+  const execute = () => {
+    context.push(execute);
+    try {
+      fn();
+    } finally {
+      context.pop();
+    }
+  };
+
+  execute();
+}
+```
+
+With this system in place, when a signal is read, it can call `getCurrentObserver()` to check if it is running inside an effect.
+
+Then it can grab a reference to that effect and add it to it's subscriber list.
+
+Then when we write to the signal, it can go and rerun all of those subscribers.
+
+```javascript
+// pseudocode
+export function createSignal(value) {
+  // Contains all effects references
+  const subscribers = new Set();
+
+  const read = () => {
+    // Check if running inside an effect
+    const current = getCurrentObserver();
+    // If so, add to subscriber list
+    if (current) subscribers.add(current); 
+    return value;
+  }
+
+  const write = (nextValue) => {
+    value = nextValue;
+    // Rerun all subscribing effects
+    for (const subscriber of subscribers) {
+      subscriber(); 
+    }
+  };
+
+  return [read, write];
+}
+```
+
+## Summary
+
+While a simplified explanation, this subscription method is at the core of how Solid works.
+
+- **`createSignal()`** tracks a reactive value, via getter & setter functions
+- **`createEffect()`** stays up to date by rerunning on observed signal changes
+- Functions can represent relationships between signals for powerful system modelling
+
+
+
+<BlogReferences>
+  <BlogReference
+    id="1"
+    title="Introduction to Reactivity with SolidJS"
+    author="Dan Jutan"
+    year="2022"
+    month="April"
+    publication="YouTube"
+    url="https://www.youtube.com/watch?v=J70HXl1KhWE&t=139s&ab_channel=SolidJS"
+  />
+  <BlogReference
+    id="2"
+    title="SolidJS Introduction/Signals"
+    author="SolidJS"
+    year="2022"
+    publication="SolidJS Tutorial"
+    url="https://www.solidjs.com/tutorial/introduction_signals"
+  />
+  <BlogReference
+    id="3"
+    title="SolidJS Introduction/Effects"
+    author="SolidJS"
+    year="2022"
+    publication="SolidJS Tutorial"
+    url="https://www.solidjs.com/tutorial/introduction_effects"
+  />
+</BlogReferences>

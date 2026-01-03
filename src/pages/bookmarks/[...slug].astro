@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import HtmlHead from "../../components/_globals/HtmlHead.astro";
+import Header from "../../components/_globals/header/Header.astro";
+import Footer from "../../components/_globals/footer/Footer.astro";
+import PageTitle from "../../components/_globals/page/PageTitle.astro";
+
+export async function getStaticPaths() {
+  const items = await getCollection("bookmarks");
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <HtmlHead title={item.data.title} />
+
+  <body>
+    <Header />
+
+    <div class="container outer border">
+      <div class="max-w-2xl">
+        <PageTitle title={item.data.title} />
+        <Content />
+      </div>
+    </div>
+
+    <Footer />
+  </body>
+</html>

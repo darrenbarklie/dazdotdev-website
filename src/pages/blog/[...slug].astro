@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from "astro:content";
+import HtmlHead from "../../components/_globals/HtmlHead.astro";
+import Header from "../../components/_globals/header/Header.astro";
+import Footer from "../../components/_globals/footer/Footer.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const objectDate = new Date(post.data.date);
+const [day, month, year] = [
+  objectDate.getDate(),
+  objectDate.toLocaleString("default", { month: "long" }),
+  objectDate.getFullYear(),
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <HtmlHead title={post.data.title} />
+
+  <body>
+    <Header />
+
+    <div class="container outer">
+      <article class="prose prose-base">
+        <header>
+          <h1>{post.data.title}</h1>
+          <span class="italic">{day} {month} {year}</span>
+        </header>
+
+        <div id="excerpt" class="text-lg font-semibold mt-4 mb-4">
+          {post.data.description}
+        </div>
+
+        <Content />
+      </article>
+    </div>
+
+    <Footer />
+  </body>
+</html>
