@@ -13,8 +13,9 @@ const isActive = currentPath.startsWith(url) && url !== "/";
   href={url}
   class:list={[
     "px-3 py-1 no-underline",
-    isActive ? "bg-white text-black" : "hover:bg-white/10"
+    isActive ? "text-term-bg bg-term-fg" : "text-term hover:text-term-bright"
   ]}
+  style={isActive ? "background: var(--term-fg); color: var(--term-bg);" : ""}
 >
   [{title.toLowerCase()}]
 </a>

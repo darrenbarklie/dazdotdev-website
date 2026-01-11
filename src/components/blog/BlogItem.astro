@@ -20,15 +20,15 @@ const {
 
 <li id={`blog-${id}`} box-="square" class="p-4 mb-4">
   <div class="flex justify-between items-start gap-4 mb-2">
-    <a href={url} class="text-blue-400 hover:underline font-semibold">
+    <a href={url} class="text-term-accent hover:underline font-semibold">
       {title}
     </a>
-    <span class="text-gray-500 flex-shrink-0 text-sm">{date}</span>
+    <span class="text-term-muted flex-shrink-0 text-sm">{date}</span>
   </div>
 
   <CategoryTags categories={categories} />
 
-  <div class="mt-3 text-gray-300">
+  <div class="mt-3 text-term-dim">
     <p>{description}</p>
   </div>
 </li>

@@ -8,8 +8,8 @@ const bookmarks = await getCollection("bookmarks");
 
 <Layout title="Bookmarks">
   <div class="mb-6">
-    <span class="text-cyan-400">$ ls -la ./bookmarks</span>
-    <span class="text-gray-500 ml-4"># {bookmarks.length} saved</span>
+    <span class="text-term">$ cat ./bookmarks</span>
+    <span class="text-term-muted ml-4"># {bookmarks.length} saved</span>
   </div>
   <ul class="space-y-4">
     {bookmarks.map((item) => <BookmarkItem content={item.data} />)}

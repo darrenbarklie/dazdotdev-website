@@ -34,16 +34,16 @@ const [day, month, year] = [
       <article class="prose prose-base">
         <header box-="square" class="p-4 mb-8">
           <div class="mb-2">
-            <span class="text-cyan-400">$ cat</span>
-            <span class="text-gray-400 ml-2">./blog/{post.id}</span>
+            <span class="text-term">$ cat</span>
+            <span class="text-term-muted ml-2">./blog/{post.id}</span>
           </div>
           <h1 class="!mt-2 !mb-2">{post.data.title}</h1>
-          <div class="text-gray-500 text-sm">
-            <span class="text-green-500">#</span> {day} {month} {year}
+          <div class="text-term-muted text-sm">
+            <span class="text-term-dim">#</span> {day} {month} {year}
           </div>
         </header>
 
-        <div id="excerpt" class="text-lg opacity-80 mb-6 pl-4 border-l-2 border-cyan-400">
+        <div id="excerpt" class="text-lg text-term-dim mb-6 pl-4 border-l-2 border-term">
           {post.data.description}
         </div>
 

@@ -21,23 +21,23 @@ const {
       href={source_url}
       rel="noopener noreferrer"
       target="_blank"
-      class="text-blue-400 hover:underline font-semibold"
+      class="text-term-accent hover:underline font-semibold"
     >
       {title}
     </a>
-    <span class="text-gray-500 flex-shrink-0 text-sm">#{id}</span>
+    <span class="text-term-muted flex-shrink-0 text-sm">#{id}</span>
   </div>
 
   <div class="flex justify-between items-center mb-3 text-sm">
-    <span class="text-yellow-500">@{source_name}</span>
+    <span class="text-term-bright">@{source_name}</span>
     <div class="flex gap-2">
       {
         Object.values(tags).map((item) => {
-          return <span class="text-cyan-400">#{item}</span>;
+          return <span class="text-term-dim">#{item}</span>;
         })
       }
     </div>
   </div>
 
-  <p class="text-gray-300">{description}</p>
+  <p class="text-term-dim">{description}</p>
 </li>

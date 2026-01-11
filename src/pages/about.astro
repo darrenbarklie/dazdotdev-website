@@ -3,42 +3,40 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="About">
-  <div class="max-w-2xl">
-    <main>
-      <div box-="square" class="p-6 mb-8">
-        <div class="mb-4">
-          <span class="text-cyan-400">$ cat ./about.md</span>
-        </div>
-        <div class="space-y-2 pl-4">
-          <p>
-            <span class="text-yellow-500">→</span> Founder of
-            <a href="https://craftapplied.com" target="_blank" class="text-blue-400 hover:underline">Craft Applied</a>
-            tech agency, est. 2018
-          </p>
-          <p><span class="text-yellow-500">→</span> Full stack TypeScript developer</p>
-          <p><span class="text-yellow-500">→</span> Currently based on Isle of Man</p>
-          <p>
-            <span class="text-yellow-500">→</span> Relapsing digital nomad:
-          </p>
-          <div class="pl-6 space-y-1 text-gray-400">
-            <p><span class="text-gray-500">├─</span> London</p>
-            <p><span class="text-gray-500">├─</span> New York City</p>
-            <p><span class="text-gray-500">└─</span> Ho Chi Minh City</p>
-          </div>
-          <p><span class="text-yellow-500">→</span> Nerd for guitar, drums & synth sounds</p>
-        </div>
+  <main>
+    <div box-="square" class="p-6 mb-8">
+      <div class="mb-4">
+        <span class="text-term">$ cat ./about.md</span>
       </div>
+      <div class="space-y-2 pl-4">
+        <p>
+          <span class="text-term-dim">→</span> Founder of
+          <a href="https://craftapplied.com" target="_blank" class="text-term-accent hover:underline">Craft Applied</a>
+          tech agency, est. 2018
+        </p>
+        <p><span class="text-term-dim">→</span> Full stack TypeScript developer</p>
+        <p><span class="text-term-dim">→</span> Currently based on Isle of Man</p>
+        <p>
+          <span class="text-term-dim">→</span> Relapsing digital nomad:
+        </p>
+        <div class="pl-6 space-y-1 text-term-dim">
+          <p><span class="text-term-muted">├─</span> London</p>
+          <p><span class="text-term-muted">├─</span> New York City</p>
+          <p><span class="text-term-muted">└─</span> Ho Chi Minh City</p>
+        </div>
+        <p><span class="text-term-dim">→</span> Nerd for guitar, drums & synth sounds</p>
+      </div>
+    </div>
 
-      <div box-="square" class="p-6">
-        <div class="mb-4">
-          <span class="text-cyan-400">$ cat ./contact.md</span>
-        </div>
-        <div class="space-y-2 pl-4">
-          <p><span class="text-green-500">email:</span> hello@daz.dev</p>
-          <p><span class="text-green-500">github:</span> <a href="https://github.com/darrenbarklie" target="_blank" class="text-blue-400 hover:underline">@darrenbarklie</a></p>
-          <p><span class="text-green-500">twitter:</span> <a href="https://twitter.com/daaboronern" target="_blank" class="text-blue-400 hover:underline">@daaboronern</a></p>
-        </div>
+    <div box-="square" class="p-6">
+      <div class="mb-4">
+        <span class="text-term">$ cat ./contact.md</span>
       </div>
-    </main>
-  </div>
+      <div class="space-y-2 pl-4">
+        <p><span class="text-term-bright">email:</span> hello@daz.dev</p>
+        <p><span class="text-term-bright">github:</span> <a href="https://github.com/darrenbarklie" target="_blank" class="text-term-accent hover:underline">@darrenbarklie</a></p>
+        <p><span class="text-term-bright">twitter:</span> <a href="https://twitter.com/daaboronern" target="_blank" class="text-term-accent hover:underline">@daaboronern</a></p>
+      </div>
+    </div>
+  </main>
 </Layout>

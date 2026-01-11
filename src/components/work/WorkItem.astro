@@ -21,14 +21,14 @@ const {
 
 <li id={`work-${id}`} box-="square" class="p-4 mb-4">
   <div class="flex justify-between items-start gap-4 mb-3">
-    <h3 class="text-lg font-semibold text-blue-400">{client}</h3>
-    <span class="text-gray-500 flex-shrink-0 text-sm">#{id}</span>
+    <h3 class="text-lg font-semibold text-term-accent">{client}</h3>
+    <span class="text-term-muted flex-shrink-0 text-sm">#{id}</span>
   </div>
 
   <div class="flex flex-wrap justify-between gap-4 mb-3 text-sm">
     <div class="space-y-2">
-      <div class="text-gray-400">
-        <span class="text-yellow-500">{date}</span>
+      <div class="text-term-dim">
+        <span class="text-term-bright">{date}</span>
         <span class="mx-2">|</span>
         <span>{location}</span>
       </div>
@@ -36,7 +36,7 @@ const {
       {urls && Object.values(urls).length > 0 && (
         <div class="space-y-1">
           {Object.values(urls).map((item) => (
-            <a href={item} rel="noopener noreferrer" target="_blank" class="block text-blue-400 hover:underline text-xs">
+            <a href={item} rel="noopener noreferrer" target="_blank" class="block text-term-accent hover:underline text-xs">
               → {item}
             </a>
           ))}
@@ -48,10 +48,10 @@ const {
 
     <div class="text-right">
       {Object.values(roles).map((item) => (
-        <div class="text-gray-400">{item}</div>
+        <div class="text-term-dim">{item}</div>
       ))}
     </div>
   </div>
 
-  <p class="text-gray-300">{blurb}</p>
+  <p class="text-term-dim">{blurb}</p>
 </li>
