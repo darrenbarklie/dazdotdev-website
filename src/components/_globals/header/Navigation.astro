@@ -1,18 +1,9 @@
 ---
-import NavLink from "./NavLink.astro";
 import SocialLink from "./SocialLink.astro";
 ---
 
 <nav class="flex items-center gap-1" aria-labelledby="primary-navigation">
   <h2 id="primary-navigation" class="sr-only">Primary Navigation</h2>
-  {
-    [
-      ["Work", "/work"],
-    ].map(([title, url]) => (
-      <NavLink title={title} url={url} />
-    ))
-  }
-  <span class="mx-2 opacity-50">|</span>
   <SocialLink
     title="x"
     url="https://x.com/dazdotdev"
