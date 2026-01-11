@@ -1,167 +1,35 @@
-/* WebTUI - Terminal UI Framework */
-@layer webtui-base, webtui-utils, webtui-components, base, utils, components;
+@layer webtui-base, webtui-utils, webtui-components;
 
 @import "@webtui/css/base.css" layer(webtui-base);
 @import "@webtui/css/utils/box.css" layer(webtui-utils);
-@import "@webtui/css/components/button.css" layer(webtui-components);
 @import "@webtui/css/components/typography.css" layer(webtui-components);
+@import "@webtui/css/components/button.css" layer(webtui-components);
 @import "@webtui/css/components/badge.css" layer(webtui-components);
 @import "@webtui/css/components/separator.css" layer(webtui-components);
 @import "@webtui/css/components/input.css" layer(webtui-components);
 @import "@webtui/css/components/pre.css" layer(webtui-components);
+@import "@webtui/theme-everforest" layer(webtui-components);
 
-/* Tailwind - for layout utilities */
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
-/* Terminal green color scheme */
-:root {
-  --term-bg: #0a0a0a;
-  --term-fg: #00ff00;
-  --term-fg-dim: #00aa00;
-  --term-fg-bright: #33ff33;
-  --term-accent: #00ffaa;
-  --term-highlight: #ffffff;
-  --term-muted: #006600;
-  --term-border: #00aa00;
+.terminal-container {
+  max-width: 80ch;
+  margin-inline: auto;
+  padding-inline: 1ch;
 }
 
-/* Custom theme configuration */
-@theme {
-  /* Minor third type scale: https://type-scale.com */
-  --font-size-xs: 0.694rem;
-  --font-size-sm: 0.833rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.2rem;
-  --font-size-xl: 1.44rem;
-  --font-size-2xl: 1.728rem;
-  --font-size-3xl: 2.074rem;
-  --font-size-4xl: 2.488rem;
+body > .terminal-container.outer {
+  flex-grow: 1;
 }
 
-@layer base {
-  html {
-    overflow-y: scroll;
-  }
-
-  /* Terminal container - 80 character width, centered */
-  .terminal-container {
-    max-width: 80ch;
-    margin-inline: auto;
-    padding-inline: 1ch;
-  }
+footer#footer {
+  flex-shrink: 0;
 }
 
-@layer components {
-  /* Terminal-style body */
-  body {
-    @apply flex flex-col min-h-screen leading-relaxed;
-    font-family: var(--font-mono, ui-monospace, monospace);
-    background: var(--term-bg);
-    color: var(--term-fg);
-  }
+.text-muted {
+  color: var(--foreground2);
+}
 
-  body > .terminal-container.outer {
-    @apply flex-grow;
-  }
-
-  footer#footer {
-    @apply shrink-0;
-  }
-
-  /* Heading anchor links */
-  *:is(h2, h3, h4, h5, h6) > a {
-    @apply -ml-6;
-  }
-  *:is(h2, h3, h4, h5, h6) > a .icon.icon-link {
-    @apply block w-4 h-4 bg-center bg-contain opacity-30;
-    background-image: url("/svg/icon-link-anchor.svg");
-    filter: invert(1) sepia(1) saturate(5) hue-rotate(90deg);
-  }
-  *:is(h2, h3, h4, h5, h6) > a .icon.icon-link:hover {
-    @apply opacity-80;
-  }
-
-  /* Terminal green color utilities */
-  .text-term {
-    color: var(--term-fg);
-  }
-  .text-term-dim {
-    color: var(--term-fg-dim);
-  }
-  .text-term-bright {
-    color: var(--term-fg-bright);
-  }
-  .text-term-accent {
-    color: var(--term-accent);
-  }
-  .text-term-muted {
-    color: var(--term-muted);
-  }
-  .bg-term {
-    background: var(--term-bg);
-  }
-  .border-term {
-    border-color: var(--term-border);
-  }
-
-  /* Prose/article styling for terminal */
-  .prose {
-    max-width: 80ch !important;
-    color: var(--term-fg);
-  }
-  .prose a {
-    color: var(--term-accent);
-  }
-  .prose a:hover {
-    color: var(--term-fg-bright);
-    text-decoration: underline;
-  }
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4,
-  .prose h5,
-  .prose h6 {
-    color: var(--term-fg-bright);
-  }
-  .prose h1 {
-    font-size: 2rem;
-    margin: 0 0 1.5rem;
-  }
-  .prose h2 {
-    font-size: 1.5rem;
-    margin: 2.5rem 0 1rem;
-  }
-  .prose h3 {
-    font-size: 1.25rem;
-    margin: 2rem 0 0.75rem;
-  }
-  .prose p {
-    margin-bottom: 1rem;
-  }
-  .prose code {
-    background: rgba(0, 255, 0, 0.1);
-    color: var(--term-fg-bright);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0;
-  }
-  .prose pre {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--term-border);
-    padding: 1rem;
-    overflow-x: auto;
-  }
-  .prose blockquote {
-    border-left: 3px solid var(--term-fg-dim);
-    padding-left: 1rem;
-    opacity: 0.9;
-  }
-  .prose ul,
-  .prose ol {
-    color: var(--term-fg);
-  }
-  .prose strong {
-    color: var(--term-fg-bright);
-  }
+.text-accent {
+  color: var(--foreground1);
 }

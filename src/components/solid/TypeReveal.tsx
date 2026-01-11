@@ -18,11 +18,14 @@ export default function TypeReveal(props: TypeRevealProps) {
   let intervalId: number | undefined;
   let revealTimeoutId: number | undefined;
 
-  const getRandomGlyph = () => glyphs[Math.floor(Math.random() * glyphs.length)];
+  const getRandomGlyph = () =>
+    glyphs[Math.floor(Math.random() * glyphs.length)];
 
   onMount(() => {
     // Initialize with random glyphs
-    setChars(props.text.split("").map((c) => (c === " " ? " " : getRandomGlyph())));
+    setChars(
+      props.text.split("").map((c) => (c === " " ? " " : getRandomGlyph())),
+    );
 
     // Cycle through random glyphs
     intervalId = setInterval(() => {
@@ -31,7 +34,7 @@ export default function TypeReveal(props: TypeRevealProps) {
           if (i < revealed()) return props.text[i];
           if (props.text[i] === " ") return " ";
           return getRandomGlyph();
-        })
+        }),
       );
     }, 30);
 
@@ -61,8 +64,11 @@ export default function TypeReveal(props: TypeRevealProps) {
       <For each={chars()}>
         {(char, i) => (
           <span
-            class={i() < revealed() ? "text-term" : "text-term-muted"}
-            style={{ transition: "color 0.1s" }}
+            style={{
+              color:
+                i() < revealed() ? "var(--foreground0)" : "var(--foreground2)",
+              transition: "color 0.1s",
+            }}
           >
             {char}
           </span>
