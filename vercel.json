@@ -127,6 +127,26 @@
       "source": "/bookmarks-september-2021/",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/bookmarks/:path*",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
