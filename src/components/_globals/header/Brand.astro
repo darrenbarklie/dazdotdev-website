@@ -1,11 +1,63 @@
 ---
-import TypeReveal from "../../solid/TypeReveal.tsx";
-
 const homeLink = `/`;
 ---
 
 <div id="brand">
-  <a href={homeLink} class="font-bold no-underline text-term-bright hover:text-term-accent">
-    <TypeReveal client:load text="daz.dev" delay={200} speed={80} />
+  <a href={homeLink} class="font-bold no-underline" style="color: var(--foreground0);">
+    <span id="brand-text">daz.dev</span>
   </a>
 </div>
+
+<script>
+  const glyphs = '!@#$%^&*()_+-=[]{}|;:\',.<>?/\\`~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const text = 'daz.dev';
+  const delay = 200;
+  const speed = 80;
+  
+  function getRandomGlyph() {
+    return glyphs[Math.floor(Math.random() * glyphs.length)];
+  }
+  
+  function init() {
+    const element = document.getElementById('brand-text');
+    if (!element) return;
+    
+    const chars = text.split('').map((c) => (c === ' ' ? ' ' : getRandomGlyph()));
+    element.textContent = chars.join('');
+    
+    let revealed = 0;
+    let intervalId: number | undefined;
+    let revealTimeoutId: number | undefined;
+    
+    intervalId = setInterval(() => {
+      element.textContent = chars.map((c, i) => {
+        if (i < revealed) return text[i];
+        if (text[i] === ' ') return ' ';
+        return getRandomGlyph();
+      }).join('');
+    }, 30);
+    
+    revealTimeoutId = setTimeout(() => {
+      const revealInterval = setInterval(() => {
+        revealed++;
+        if (revealed >= text.length) {
+          clearInterval(revealInterval);
+          if (intervalId) clearInterval(intervalId);
+          element.textContent = text;
+          return;
+        }
+        element.textContent = chars.map((c, i) => {
+          if (i < revealed) return text[i];
+          if (text[i] === ' ') return ' ';
+          return getRandomGlyph();
+        }).join('');
+      }, speed);
+    }, delay);
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>

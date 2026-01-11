@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
-import solidJs from "@astrojs/solid-js";
 
 import remarkToc from "remark-toc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -18,7 +17,6 @@ export default defineConfig({
       remarkPlugins: [remarkToc],
       rehypePlugins: [rehypeAutolinkHeadings],
     }),
-    solidJs(),
   ],
   vite: {
     plugins: [tailwindcss()],
