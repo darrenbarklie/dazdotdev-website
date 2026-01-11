@@ -3,12 +3,18 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="404">
-  <div class="container">
-    <main>
-      <div class="bg-gray-100 flex flex-col items-center p-8 rounded-lg">
-        <p class="font-bold text-lg">404</p>
-        <small>Page Not Found</small>
+  <main>
+    <div box-="square" class="p-8 text-center">
+      <div class="mb-4">
+        <span class="text-term-bright text-2xl font-bold">ERROR 404</span>
       </div>
-    </main>
-  </div>
+      <div class="mb-6 text-term-dim">
+        <span class="text-term">$</span> cat ./page
+      </div>
+      <div class="text-term mb-4">
+        cat: ./page: No such file or directory
+      </div>
+      <a href="/" class="text-term-accent hover:underline">[return home]</a>
+    </div>
+  </main>
 </Layout>

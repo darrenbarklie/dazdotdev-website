@@ -1,14 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const title = "Home";
 ---
 
-<Layout title={title}>
+<Layout title="About">
   <main>
-    <div box-="square" class="p-6">
+    <div box-="square" class="p-6 mb-8">
       <div class="mb-4">
-        <span class="text-term">$ whoami</span>
+        <span class="text-term">$ cat ./about.md</span>
       </div>
       <div class="space-y-2 pl-4">
         <p>
@@ -27,6 +25,17 @@ const title = "Home";
           <p><span class="text-term-muted">└─</span> Ho Chi Minh City</p>
         </div>
         <p><span class="text-term-dim">→</span> Nerd for guitar, drums & synth sounds</p>
+      </div>
+    </div>
+
+    <div box-="square" class="p-6">
+      <div class="mb-4">
+        <span class="text-term">$ cat ./contact.md</span>
+      </div>
+      <div class="space-y-2 pl-4">
+        <p><span class="text-term-bright">email:</span> mail@daz.dev</p>
+        <p><span class="text-term-bright">github:</span> <a href="https://github.com/darrenbarklie" target="_blank" class="text-term-accent hover:underline">@darrenbarklie</a></p>
+        <p><span class="text-term-bright">x:</span> <a href="https://x.com/dazdotdev" target="_blank" class="text-term-accent hover:underline">@dazdotdev</a></p>
       </div>
     </div>
   </main>

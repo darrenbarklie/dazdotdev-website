@@ -19,46 +19,39 @@ const {
 } = Astro.props as Props;
 ---
 
-<li id={`work-${id}`} class="border border-gray-400 rounded p-4 pb-6 mb-4">
-  <header
-    class="flex justify-between items-center border-b border-gray-400 pb-2 mb-4"
-  >
-    <h3 class="text-xl weight-bold leading-tight">{client}</h3>
-    <span class="text-gray-400">[#{id}]</span>
-  </header>
+<li id={`work-${id}`} box-="square" class="p-4 mb-4">
+  <div class="flex justify-between items-start gap-4 mb-3">
+    <h3 class="text-lg font-semibold text-term-accent">{client}</h3>
+    <span class="text-term-muted flex-shrink-0 text-sm">#{id}</span>
+  </div>
 
-  <div class="flex flex-wrap justify-between mb-2">
-    <div>
-      <span class="mr-2">{date}</span>|<span class="ml-2">{location}</span>
-
-      <div class="mt-2 mb-2">
-        <ul>
-          {
-            Object.values(urls).map((item) => {
-              return (
-                <>
-                  {/* prettier-ignore */}
-                  <li>
-                    <a href={item} rel="noopener noreferrer" target="_blank" class="pr-4 underline font-mono text-sm font-semibold">{item}</a>
-                  </li>
-                </>
-              );
-            })
-          }
-        </ul>
+  <div class="flex flex-wrap justify-between gap-4 mb-3 text-sm">
+    <div class="space-y-2">
+      <div class="text-term-dim">
+        <span class="text-term-bright">{date}</span>
+        <span class="mx-2">|</span>
+        <span>{location}</span>
       </div>
+
+      {urls && Object.values(urls).length > 0 && (
+        <div class="space-y-1">
+          {Object.values(urls).map((item) => (
+            <a href={item} rel="noopener noreferrer" target="_blank" class="block text-term-accent hover:underline text-xs">
+              → {item}
+            </a>
+          ))}
+        </div>
+      )}
 
       <CategoryTags categories={tech} />
     </div>
 
-    <ul>
-      {
-        Object.values(roles).map((item) => {
-          return <li class="block text-left md:text-right pr-2">{item}</li>;
-        })
-      }
-    </ul>
+    <div class="text-right">
+      {Object.values(roles).map((item) => (
+        <div class="text-term-dim">{item}</div>
+      ))}
+    </div>
   </div>
 
-  <p>{blurb}</p>
+  <p class="text-term-dim">{blurb}</p>
 </li>

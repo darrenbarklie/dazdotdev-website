@@ -1,12 +1,36 @@
 ---
-const { title, url } = Astro.props;
-
 interface Props {
   title: string;
   url: string;
 }
+
+const { title, url } = Astro.props;
+const currentPath = Astro.url.pathname;
+const isActive = currentPath.startsWith(url) && url !== "/";
 ---
 
-<a href={url} class="px-4 py-3 hover:bg-gray-200 hover:text-gray-900">
-  {title}
+<a
+  href={url}
+  class:list={[
+    "nav-link px-2 py-1 no-underline transition-colors",
+    isActive ? "active" : ""
+  ]}
+>
+  [{title.toLowerCase()}]
 </a>
+
+<style>
+  .nav-link {
+    color: var(--term-fg-dim);
+  }
+  .nav-link:hover {
+    color: var(--term-fg-bright);
+  }
+  .nav-link:active {
+    color: var(--term-fg);
+  }
+  .nav-link.active {
+    color: var(--term-bg);
+    background: var(--term-fg);
+  }
+</style>

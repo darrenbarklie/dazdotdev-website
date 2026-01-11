@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import HtmlHead from "../../components/_globals/HtmlHead.astro";
 import Header from "../../components/_globals/header/Header.astro";
 import Footer from "../../components/_globals/footer/Footer.astro";
-import PageTitle from "../../components/_globals/page/PageTitle.astro";
+import PageTransition from "../../components/solid/PageTransition.tsx";
 
 export async function getStaticPaths() {
   const items = await getCollection("bookmarks");
@@ -22,13 +22,24 @@ const { Content } = await render(item);
   <HtmlHead title={item.data.title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
-    <div class="container outer border">
-      <div class="max-w-2xl">
-        <PageTitle title={item.data.title} />
+    <div class="container outer">
+      <article class="prose prose-base">
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-term">$ cat</span>
+            <span class="text-term-muted ml-2">./bookmarks/{item.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{item.data.title}</h1>
+          <div class="text-sm">
+            <span class="text-term-bright">@{item.data.source_name}</span>
+            <a href={item.data.source_url} target="_blank" rel="noopener noreferrer" class="ml-4 text-term-accent hover:underline">[source]</a>
+          </div>
+        </header>
         <Content />
-      </div>
+      </article>
     </div>
 
     <Footer />

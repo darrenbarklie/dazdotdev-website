@@ -6,10 +6,4 @@ export interface Props {
 const { title } = Astro.props as Props;
 ---
 
-{title !== "Home" ? (
-  <h1 class="text-xl font-bold mb-4">{title}</h1>
-) : (
-  <h1 class="sr-only">{title}</h1>
-  <h2 class="text-xl font-bold mb-4">The Gist</h2>
-  )
-}
+<h1 class="sr-only">{title}</h1>

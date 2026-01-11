@@ -7,7 +7,11 @@ const work = await getCollection("work");
 ---
 
 <Layout title="Work History">
-  <ul>
+  <div class="mb-6">
+    <span class="text-term">$ cat ./work</span>
+    <span class="text-term-muted ml-4"># {work.length} projects</span>
+  </div>
+  <ul class="space-y-4">
     {work.map((item) => <WorkItem content={item.data} />)}
   </ul>
 </Layout>

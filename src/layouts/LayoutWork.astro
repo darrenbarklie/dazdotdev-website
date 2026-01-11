@@ -2,6 +2,7 @@
 import HtmlHead from "../components/_globals/HtmlHead.astro";
 import Header from "../components/_globals/header/Header.astro";
 import Footer from "../components/_globals/footer/Footer.astro";
+import PageTransition from "../components/solid/PageTransition.tsx";
 
 export interface Props {
   content: {
@@ -19,13 +20,12 @@ const {
   <HtmlHead title={title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{title}</h1>
-        </header>
+        <h1 class="sr-only">{title}</h1>
 
         <slot />
       </article>

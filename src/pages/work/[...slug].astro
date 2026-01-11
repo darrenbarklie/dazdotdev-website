@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import HtmlHead from "../../components/_globals/HtmlHead.astro";
 import Header from "../../components/_globals/header/Header.astro";
 import Footer from "../../components/_globals/footer/Footer.astro";
+import PageTransition from "../../components/solid/PageTransition.tsx";
 
 export async function getStaticPaths() {
   const items = await getCollection("work");
@@ -21,12 +22,22 @@ const { Content } = await render(item);
   <HtmlHead title={item.data.client} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{item.data.client}</h1>
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-term">$ cat</span>
+            <span class="text-term-muted ml-2">./work/{item.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{item.data.client}</h1>
+          <div class="text-sm text-term-dim">
+            <span class="text-term-bright">{item.data.date}</span>
+            <span class="mx-2">|</span>
+            <span>{item.data.location}</span>
+          </div>
         </header>
 
         <Content />

@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import HtmlHead from "../../components/_globals/HtmlHead.astro";
 import Header from "../../components/_globals/header/Header.astro";
 import Footer from "../../components/_globals/footer/Footer.astro";
+import PageTransition from "../../components/solid/PageTransition.tsx";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -28,16 +29,23 @@ const [day, month, year] = [
   <HtmlHead title={post.data.title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{post.data.title}</h1>
-          <span class="italic">{day} {month} {year}</span>
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-term">$ cat</span>
+            <span class="text-term-muted ml-2">./blog/{post.id}</span>
+          </div>
+          <h1 class="!mt-2 !mb-2">{post.data.title}</h1>
+          <div class="text-term-muted text-sm">
+            <span class="text-term-dim">#</span> {day} {month} {year}
+          </div>
         </header>
 
-        <div id="excerpt" class="text-lg font-semibold mt-4 mb-4">
+        <div id="excerpt" class="text-lg text-term-dim mb-6 pl-4 border-l-2 border-term">
           {post.data.description}
         </div>
 

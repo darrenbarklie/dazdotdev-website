@@ -1,18 +1,18 @@
 ---
-const currentDate = new Date();
 const currentYear = new Date().getFullYear();
 ---
 
-<footer id="footer" class="border-t border-gray-400 mt-32">
-  <div class="container flex justify-between items-center pt-10 pb-8">
-    <div id="copyright">&copy; {currentYear} Darren Barklie</div>
-    <div>
-      <a href="/privacy" class="underline">Privacy Policy</a>
-    </div>
-  </div>
-  <div id="nerd" class="container flex justify-between items-center pb-10">
-    <div id="nerd" class="text-xs text-gray-400">
-      Page rendered at {currentDate}
+<footer id="footer" class="mt-16 mb-8">
+  <div class="container">
+    <div box-="square" class="px-4 py-3">
+      <div class="flex justify-between items-center">
+        <div id="copyright" class="text-sm">
+          <span class="text-term-muted">#</span> &copy; {currentYear} Darren Barklie
+        </div>
+        <div class="flex gap-4 text-sm">
+          <a href="/privacy" class="no-underline text-term-dim hover:text-term-bright px-2 py-1">[privacy]</a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
