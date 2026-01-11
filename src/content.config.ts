@@ -37,4 +37,4 @@ const bookmarks = defineCollection({
   }),
 });
 
-export const collections = { blog, work, bookmarks };
+export const collections = { blog, work };

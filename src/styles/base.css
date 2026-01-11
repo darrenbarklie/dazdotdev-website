@@ -45,10 +45,10 @@
   }
 
   /* Terminal container - 80 character width, centered */
-  .container {
+  .terminal-container {
     max-width: 80ch;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1ch;
   }
 }
 
@@ -61,7 +61,7 @@
     color: var(--term-fg);
   }
 
-  body > .container.outer {
+  body > .terminal-container.outer {
     @apply flex-grow;
   }
 
@@ -75,7 +75,7 @@
   }
   *:is(h2, h3, h4, h5, h6) > a .icon.icon-link {
     @apply block w-4 h-4 bg-center bg-contain opacity-30;
-    background-image: url('/svg/icon-link-anchor.svg');
+    background-image: url("/svg/icon-link-anchor.svg");
     filter: invert(1) sepia(1) saturate(5) hue-rotate(90deg);
   }
   *:is(h2, h3, h4, h5, h6) > a .icon.icon-link:hover {
@@ -83,17 +83,31 @@
   }
 
   /* Terminal green color utilities */
-  .text-term { color: var(--term-fg); }
-  .text-term-dim { color: var(--term-fg-dim); }
-  .text-term-bright { color: var(--term-fg-bright); }
-  .text-term-accent { color: var(--term-accent); }
-  .text-term-muted { color: var(--term-muted); }
-  .bg-term { background: var(--term-bg); }
-  .border-term { border-color: var(--term-border); }
+  .text-term {
+    color: var(--term-fg);
+  }
+  .text-term-dim {
+    color: var(--term-fg-dim);
+  }
+  .text-term-bright {
+    color: var(--term-fg-bright);
+  }
+  .text-term-accent {
+    color: var(--term-accent);
+  }
+  .text-term-muted {
+    color: var(--term-muted);
+  }
+  .bg-term {
+    background: var(--term-bg);
+  }
+  .border-term {
+    border-color: var(--term-border);
+  }
 
   /* Prose/article styling for terminal */
   .prose {
-    max-width: 80ch;
+    max-width: 80ch !important;
     color: var(--term-fg);
   }
   .prose a {
@@ -143,7 +157,8 @@
     padding-left: 1rem;
     opacity: 0.9;
   }
-  .prose ul, .prose ol {
+  .prose ul,
+  .prose ol {
     color: var(--term-fg);
   }
   .prose strong {

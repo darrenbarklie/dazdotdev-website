@@ -7,10 +7,8 @@ import SocialLink from "./SocialLink.astro";
   <h2 id="primary-navigation" class="sr-only">Primary Navigation</h2>
   {
     [
-      ["About", "/about"],
       ["Work", "/work"],
       ["Blog", "/blog"],
-      ["Bookmarks", "/bookmarks"],
     ].map(([title, url]) => (
       <NavLink title={title} url={url} />
     ))
