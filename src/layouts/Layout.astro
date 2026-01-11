@@ -3,7 +3,6 @@ import HtmlHead from "../components/_globals/HtmlHead.astro";
 import Header from "../components/_globals/header/Header.astro";
 import Footer from "../components/_globals/footer/Footer.astro";
 import PageTitle from "../components/_globals/page/PageTitle.astro";
-import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -15,10 +14,8 @@ const { title } = Astro.props as Props;
 <!DOCTYPE html>
 <html lang="en">
   <HtmlHead title={title} />
-  <ViewTransitions />
 
   <body>
-    <div id="scramble-overlay" class="scramble-overlay"></div>
     <Header />
 
     <div class="terminal-container outer">
@@ -27,97 +24,5 @@ const { title } = Astro.props as Props;
     </div>
 
     <Footer />
-
-    <script>
-      const glyphs = '!@#$%^&*()_+-=[]{}|;:\',.<>?/\\`~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      
-      function getRandomGlyph() {
-        return glyphs[Math.floor(Math.random() * glyphs.length)];
-      }
-      
-      function generateRandomLines(count: number, length: number = 60) {
-        const lines = [];
-        for (let i = 0; i < count; i++) {
-          let line = '';
-          for (let j = 0; j < length; j++) {
-            line += Math.random() > 0.3 ? getRandomGlyph() : ' ';
-          }
-          lines.push(line);
-        }
-        return lines;
-      }
-      
-      let intervalId: number | undefined;
-      const overlay = document.getElementById('scramble-overlay');
-      
-      function startScramble(phaseType: 'out' | 'in') {
-        if (!overlay) return;
-        
-        overlay.style.display = 'flex';
-        overlay.style.opacity = '1';
-        
-        let frame = 0;
-        const maxFrames = phaseType === 'out' ? 8 : 12;
-        
-        function animate() {
-          frame++;
-          
-          if (phaseType === 'out') {
-            const lineCount = Math.max(1, Math.floor(15 * (1 - frame / maxFrames)));
-            overlay.innerHTML = generateRandomLines(lineCount).map(line => 
-              `<div style="opacity: ${1 - (frame / maxFrames) * 0.5}; white-space: pre;">${line}</div>`
-            ).join('');
-          } else {
-            const progress = frame / maxFrames;
-            if (progress < 0.7) {
-              const lineCount = Math.floor(15 * (progress / 0.7));
-              overlay.innerHTML = generateRandomLines(lineCount).map(line => 
-                `<div style="opacity: ${0.3 + (frame / maxFrames) * 0.4}; white-space: pre;">${line}</div>`
-              ).join('');
-            } else {
-              const lineCount = Math.max(0, Math.floor(15 * (1 - (progress - 0.7) / 0.3)));
-              overlay.innerHTML = generateRandomLines(lineCount).map(line => 
-                `<div style="opacity: ${1 - (progress - 0.7) / 0.3}; white-space: pre;">${line}</div>`
-              ).join('');
-            }
-          }
-          
-          if (frame < maxFrames) {
-            intervalId = setTimeout(animate, 40);
-          } else {
-            if (phaseType === 'in') {
-              overlay.style.opacity = '0';
-              setTimeout(() => {
-                overlay.style.display = 'none';
-                overlay.innerHTML = '';
-              }, 150);
-            } else {
-              overlay.style.opacity = '0';
-              setTimeout(() => {
-                overlay.style.display = 'none';
-                overlay.innerHTML = '';
-              }, 150);
-            }
-          }
-        }
-        
-        animate();
-      }
-      
-      document.addEventListener('astro:before-preparation', () => {
-        startScramble('out');
-      });
-      
-      document.addEventListener('astro:after-swap', () => {
-        startScramble('in');
-      });
-      
-      document.addEventListener('astro:page-load', () => {
-        if (overlay) {
-          overlay.style.display = 'none';
-          overlay.innerHTML = '';
-        }
-      });
-    </script>
   </body>
 </html>
