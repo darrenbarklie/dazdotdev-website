@@ -1,9 +1,11 @@
 ---
+import TypeReveal from "../../solid/TypeReveal.tsx";
+
 const homeLink = `/`;
 ---
 
 <div id="brand">
   <a href={homeLink} class="font-bold no-underline text-term-bright hover:text-term-accent">
-    daz.dev
+    <TypeReveal client:load text="daz.dev" delay={200} speed={80} />
   </a>
 </div>

@@ -18,11 +18,9 @@ const { title } = Astro.props as Props;
   <body>
     <Header />
 
-    <div class="container outer border">
-      <div class="max-w-2xl">
-        <PageTitle title={title} />
-        <slot />
-      </div>
+    <div class="container outer">
+      <PageTitle title={title} />
+      <slot />
     </div>
 
     <Footer />

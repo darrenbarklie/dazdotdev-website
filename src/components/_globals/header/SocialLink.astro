@@ -12,7 +12,19 @@ const { title, url } = Astro.props;
   href={url}
   target="_blank"
   rel="noopener noreferrer"
-  class="px-3 py-1 no-underline text-term-dim hover:text-term-bright"
+  class="social-link px-2 py-1 no-underline transition-colors"
 >
   [@{title.toLowerCase()}]
 </a>
+
+<style>
+  .social-link {
+    color: var(--term-fg-dim);
+  }
+  .social-link:hover {
+    color: var(--term-fg-bright);
+  }
+  .social-link:active {
+    color: var(--term-fg);
+  }
+</style>
