@@ -52,3 +52,68 @@ footer#footer {
 .scramble-overlay div {
   font-family: var(--font-family, ui-monospace, monospace);
 }
+
+/* Typewriter effect styles */
+.typewriter {
+  contain: strict;
+  min-height: 1lh;
+  display: inline;
+}
+
+.typewriter-content {
+  opacity: 0;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  opacity: 1;
+}
+
+.typewriter-cursor.static {
+  animation: none;
+}
+
+.typewriter-cursor.hidden {
+  display: none;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-content {
+    opacity: 1 !important;
+  }
+  .typewriter-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.scramble-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--background0);
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family, monospace);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  transition: opacity 0.15s ease-out;
+}
+
+.scramble-overlay div {
+  font-family: var(--font-family, ui-monospace, monospace);
+}

@@ -117,7 +117,91 @@ const { title } = Astro.props as Props;
           overlay.style.display = 'none';
           overlay.innerHTML = '';
         }
+        initTypewriters();
       });
+    </script>
+
+    <script is:inline>
+      // Typewriter effect initialization
+      document.addEventListener('astro:page-load', () => {
+        initTypewriters();
+        autoWrapTypewriters();
+      });
+
+      function initTypewriters() {
+        document.querySelectorAll('.typewriter').forEach(initTypewriter);
+      }
+
+      function initTypewriter(element) {
+        const text = element.dataset.text;
+        const speed = parseInt(element.dataset.speed) || 30;
+        const delay = parseInt(element.dataset.delay) || 0;
+
+        const content = element.querySelector('.typewriter-content');
+        const cursor = element.querySelector('.typewriter-cursor');
+
+        if (!content || !text) return;
+
+        let index = 0;
+
+        function type() {
+          if (index < text.length) {
+            content.textContent = text.substring(0, index + 1);
+            index++;
+            requestAnimationFrame(() => setTimeout(type, speed));
+          }
+        }
+
+        setTimeout(type, delay);
+      }
+
+      // Auto-wrap content elements with typewriter effect
+      function autoWrapTypewriters() {
+        // Only run if we haven't wrapped content yet
+        if (document.querySelector('.content-typewriter-wrapped')) return;
+
+        const contentAreas = document.querySelectorAll('.terminal-container > main, .terminal-container > article, .prose');
+
+        contentAreas.forEach((area, areaIndex) => {
+          const targets = area.querySelectorAll('h1, h2, h3, p, li, blockquote');
+          let delay = 0;
+
+          targets.forEach((el, index) => {
+            const text = el.textContent?.trim();
+            if (!text || text.length === 0 || text.length > 1000) return;
+
+            // Skip if already wrapped
+            if (el.closest('.typewriter')) return;
+
+            // Stagger by 100ms, but reset every new area
+            delay = (areaIndex * 2000) + (index * 150);
+
+            wrapElement(el, text, delay);
+          });
+        });
+
+        document.body.classList.add('content-typewriter-wrapped');
+        initTypewriters();
+      }
+
+      function wrapElement(element, text, delay) {
+        const wrapper = document.createElement('span');
+        wrapper.className = 'typewriter';
+        wrapper.dataset.text = text;
+        wrapper.dataset.speed = '30';
+        wrapper.dataset.delay = delay.toString();
+
+        const content = document.createElement('span');
+        content.className = 'typewriter-content';
+
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+        cursor.textContent = '▋';
+
+        wrapper.appendChild(content);
+        wrapper.appendChild(cursor);
+        element.replaceWith(wrapper);
+      }
     </script>
   </body>
 </html>
