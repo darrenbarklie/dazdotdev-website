@@ -6,11 +6,11 @@ const currentYear = new Date().getFullYear();
   <div class="terminal-container">
     <div box-="square" class="px-4 py-3">
       <div class="flex justify-between items-center">
-        <div id="copyright" class="text-sm">
-          <span class="text-term-muted">#</span> &copy; {currentYear} Darren Barklie
+        <div id="copyright" class="text-sm" style="color: var(--foreground2);">
+          &copy; {currentYear} Darren Barklie
         </div>
         <div class="flex gap-4 text-sm">
-          <a href="/privacy" class="no-underline text-term-dim hover:text-term-bright px-2 py-1">[privacy]</a>
+          <a href="/privacy" class="no-underline hover:underline px-2 py-1" style="color: var(--foreground1);">[privacy]</a>
         </div>
       </div>
     </div>
