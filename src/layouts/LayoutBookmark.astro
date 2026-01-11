@@ -3,6 +3,7 @@ import HtmlHead from "../components/_globals/HtmlHead.astro";
 import Header from "../components/_globals/header/Header.astro";
 import Footer from "../components/_globals/footer/Footer.astro";
 import PageTitle from "../components/_globals/page/PageTitle.astro";
+import PageTransition from "../components/solid/PageTransition.tsx";
 
 export interface Props {
   title: string;
@@ -16,6 +17,7 @@ const { title } = Astro.props as Props;
   <HtmlHead title={title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">

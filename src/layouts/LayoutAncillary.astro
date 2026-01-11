@@ -2,6 +2,7 @@
 import HtmlHead from "../components/_globals/HtmlHead.astro";
 import Header from "../components/_globals/header/Header.astro";
 import Footer from "../components/_globals/footer/Footer.astro";
+import PageTransition from "../components/solid/PageTransition.tsx";
 
 export interface Props {
   content: {
@@ -28,17 +29,22 @@ const [day, month, year] = [
   <HtmlHead title={title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">
       <article class="prose prose-base">
-        <header>
-          <h1>{title}</h1>
-          <span>
-            Last updated: <span class="italic">{day} {month} {year}</span>
-          </span>
-          <br />
-          <span>Version: <span class="italic">{version}</span></span>
+        <header box-="square" class="p-4 mb-8">
+          <div class="mb-2">
+            <span class="text-term">$ cat</span>
+            <span class="text-term-muted ml-2">./{title.toLowerCase().replace(/\s+/g, '-')}</span>
+          </div>
+          <h1 class="sr-only">{title}</h1>
+          <div class="text-term-muted text-sm">
+            <span class="text-term-dim">#</span> Last updated: {day} {month} {year}
+            <span class="mx-2">|</span>
+            v{version}
+          </div>
         </header>
 
         <slot />

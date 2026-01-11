@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import HtmlHead from "../../components/_globals/HtmlHead.astro";
 import Header from "../../components/_globals/header/Header.astro";
 import Footer from "../../components/_globals/footer/Footer.astro";
+import PageTransition from "../../components/solid/PageTransition.tsx";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -28,6 +29,7 @@ const [day, month, year] = [
   <HtmlHead title={post.data.title} />
 
   <body>
+    <PageTransition client:load />
     <Header />
 
     <div class="container outer">
