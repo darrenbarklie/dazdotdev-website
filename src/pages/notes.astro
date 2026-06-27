@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import BlogItem from "../components/blog/BlogItem.astro";
+
+const title = "Notes";
+
+const notes = (await getCollection("blog")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+---
+
+<Layout title={title}>
+  <main class="w-full">
+    <div box-="square" class="p-6">
+      <div class="mb-4">
+        <span style="color: var(--foreground0);">$ notes</span>
+      </div>
+
+      {
+        notes.length > 0 ? (
+          <ul class="m-0 list-none p-0">
+            {notes.map((note) => (
+              <BlogItem
+                url={`/notes/${note.id}`}
+                content={{
+                  id: note.id,
+                  title: note.data.title,
+                  description: note.data.description,
+                  date: note.data.date,
+                  categories: note.data.categories ?? [],
+                }}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div class="space-y-2 pl-4">
+            <p>
+              <span style="color: var(--foreground1);">→</span> Observations, technical learning, and self-reflection will live here.
+            </p>
+            <p>
+              <span style="color: var(--foreground1);">→</span> Written to sharpen my own judgment first.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Layout>
