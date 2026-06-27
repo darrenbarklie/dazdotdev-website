@@ -9,132 +9,7 @@
       "permanent": true
     },
     {
-      "source": "/blog-init/",
-      "destination": "/blog/20200525-blog-init/",
-      "permanent": true
-    },
-    {
-      "source": "/hype-cycle-for-emerging-technologies-2021/",
-      "destination": "/blog/20210823-hype-cycle-for-emerging-technologies-2021/",
-      "permanent": true
-    },
-    {
-      "source": "/the-birth-of-bitcoin-and-blockchain/",
-      "destination": "/blog/20210901-the-birth-of-bitcoin-and-blockchain/",
-      "permanent": true
-    },
-    {
-      "source": "/creative-spark-eric-roth/",
-      "destination": "/blog/20211026-creative-spark-eric-roth/",
-      "permanent": true
-    },
-    {
-      "source": "/how-to-register-a-sol-domain/",
-      "destination": "/blog/20211104-how-to-register-a-sol-domain/",
-      "permanent": true
-    },
-    {
-      "source": "/on-meditation/",
-      "destination": "/blog/20211105-on-meditation/",
-      "permanent": true
-    },
-    {
-      "source": "/mild-und-leise/",
-      "destination": "/blog/20211108-mild-und-leise/",
-      "permanent": true
-    },
-    {
-      "source": "/back-in-the-big-smoke/",
-      "destination": "/blog/20211112-back-in-the-big-smoke/",
-      "permanent": true
-    },
-    {
-      "source": "/a-mind/",
-      "destination": "/blog/20211114-a-mind/",
-      "permanent": true
-    },
-    {
-      "source": "/ill/",
-      "destination": "/blog/20211201-ill/",
-      "permanent": true
-    },
-    {
-      "source": "/new-year-new-ambitions/",
-      "destination": "/blog/20220101-new-year-new-ambitions/",
-      "permanent": true
-    },
-    {
-      "source": "/vc-ama-with-eliot-durbin-boldstart-ventures/",
-      "destination": "/blog/20220129-vc-ama-with-eliot-durbin-boldstart-ventures/",
-      "permanent": true
-    },
-    {
-      "source": "/console/",
-      "destination": "/blog/20220226-console/",
-      "permanent": true
-    },
-    {
-      "source": "/git-stash/",
-      "destination": "/blog/20220305-git-stash/",
-      "permanent": true
-    },
-    {
-      "source": "/destructuring-react-props-with-typescript/",
-      "destination": "/blog/20220512-destructuring-react-props-with-typescript/",
-      "permanent": true
-    },
-    {
-      "source": "/typeorm-migrations-for-nestjs/",
-      "destination": "/blog/20220520-typeorm-migrations-for-nestjs/",
-      "permanent": true
-    },
-    {
-      "source": "/tmux-quickstart/",
-      "destination": "/blog/20220619-tmux-quickstart/",
-      "permanent": true
-    },
-    {
-      "source": "/vc-ama-with-eliot-durbin-boldstart-ventures/",
-      "destination": "/blog/20220129-vc-ama-with-eliot-durbin-boldstart-ventures/",
-      "permanent": true
-    },
-    {
-      "source": "/tmux-quickstart/",
-      "destination": "/blog/20220619-tmux-quickstart/",
-      "permanent": true
-    },
-    {
-      "source": "/week31-focusplan/",
-      "destination": "/blog/20220731-week31-focus/",
-      "permanent": true
-    },
-    {
-      "source": "/you-will-never-do-anything-remarkable/",
-      "destination": "/blog/",
-      "permanent": true
-    },
-    {
-      "source": "/redux-toolkit-rtk-query-snippets/",
-      "destination": "/blog/",
-      "permanent": false
-    },
-    {
-      "source": "/bookmarks-august-2021/",
-      "destination": "/blog/",
-      "permanent": true
-    },
-    {
-      "source": "/bookmarks-september-2021/",
-      "destination": "/blog/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/:path*",
+      "source": "/about/",
       "destination": "/",
       "permanent": true
     },
@@ -142,11 +17,36 @@
       "source": "/about/:path*",
       "destination": "/",
       "permanent": true
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/blog(?:/.*)?$",
+      "status": 410,
+      "headers": {
+        "X-Robots-Tag": "noindex, noarchive"
+      }
     },
     {
-      "source": "/bookmarks/:path*",
-      "destination": "/",
-      "permanent": true
+      "src": "^/bookmarks(?:/.*)?$",
+      "status": 410,
+      "headers": {
+        "X-Robots-Tag": "noindex, noarchive"
+      }
+    },
+    {
+      "src": "^/work(?:/.*)?$",
+      "status": 410,
+      "headers": {
+        "X-Robots-Tag": "noindex, noarchive"
+      }
+    },
+    {
+      "src": "^/(?:blog-init|hype-cycle-for-emerging-technologies-2021|the-birth-of-bitcoin-and-blockchain|creative-spark-eric-roth|how-to-register-a-sol-domain|on-meditation|mild-und-leise|back-in-the-big-smoke|a-mind|ill|new-year-new-ambitions|vc-ama-with-eliot-durbin-boldstart-ventures|console|git-stash|destructuring-react-props-with-typescript|typeorm-migrations-for-nestjs|tmux-quickstart|week31-focusplan|you-will-never-do-anything-remarkable|redux-toolkit-rtk-query-snippets|bookmarks-august-2021|bookmarks-september-2021)/?$",
+      "status": 410,
+      "headers": {
+        "X-Robots-Tag": "noindex, noarchive"
+      }
     }
   ]
 }
