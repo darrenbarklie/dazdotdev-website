@@ -23,6 +23,18 @@ body {
   animation: fadeIn 0.3s ease-out;
 }
 
+::selection {
+  color: #272e33;
+  background-color: #d3c6aa;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  color: #272e33;
+  background-color: #d3c6aa;
+  text-shadow: none;
+}
+
 /* Center entire page content */
 .page-container {
   display: flex;
