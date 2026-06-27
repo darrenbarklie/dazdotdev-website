@@ -21,5 +21,5 @@ Software and platform work shaped by current AI development practices, data, and
 _Avoid_: AI-native, AI expert, AI bro, leveraging AI
 
 **Past Work**:
-Supporting evidence that Darren has built real software, platforms, and businesses over time. Canonical summary: "15+ years building web products, internal tools, platforms, ecommerce, and community projects across finance, education, health, construction, and local organisations."
+Supporting evidence that Darren has built real software, platforms, and businesses over time. Canonical summary: "15+ years building web products, internal tools, platforms, and ecommerce. Delivered for finance, education, health, construction, and local organisations."
 _Avoid_: Portfolio, trophy wall, case study archive, record of achievement
